@@ -11,19 +11,32 @@
 
     <script type="text/babel">
         function App() {
-            const [minutes, setMinutes] = React.useState();
+            const [amount, setAmount] = React.useState();
+            const [flipped, setFlipped] = React.useState(false);
             const setChangeValue = (event) => {
-                setMinutes(event.target.value);
+                setAmount(event.target.value);
+            };
+            const onReset = () => {
+                setAmount(0);
+            };
+            const onFlip = () => {
+                onReset();
+                setFlipped((current) => !current);
             };
 
             return (
             <div>
                 <h1>Super Converter</h1>
-                <label htmlFor="minutes">Minutes</label>
-                <input id="minutes" value={minutes} type="number" placeholder="Minutes" onChange={setChangeValue} />
-                <h4>You want to convert {minutes}</h4>
-                <label htmlFor="hours">Hours</label>
-                <input id="hours" type="number" placeholder="Hours" />
+                <div>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input id="minutes" value={flipped ? amount*60 : amount} type="number" placeholder="Minutes" onChange={setChangeValue} disabled={flipped} />
+                </div>
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input id="hours" value={flipped ? amount : Math.round(amount/60)} type="number" placeholder="Hours" onChange={setChangeValue} disabled={!flipped} />
+                </div>
+                <button onClick={onReset}>Reset</button>
+                <button onClick={onFlip}>Flip</button>
             </div>
         )};
 
