@@ -8,23 +8,27 @@
     <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <script type="text/babel">
         const root = document.getElementById("root");
-        const Title = () => (
-            <h3 id="title" style={{color:"purple"}} onMouseEnter={() => console.log("mouse enter")}>JSX Part</h3>
-        );
-        const Btn = () => (
-            <button id="btn" style={{backgroundColor: "skyblue"}} onClick={() => console.log("clicked")}>Click</button>
-        );
-        const Container = () => (
+        let counter = 0;
+
+        function countUp() {
+            counter++;
+            reRender();
+        };
+
+        function reRender() {
+            ReactDOM.render(<Container />, root);
+        };
+
+        function Container() {
+            return (
             <div>
-                <Title />
-                <p>만든 컴포넌트는 반드시 대문자로 시작해야한다.</p>
-                <span>JSX 방식의 코드를 Babel 이 브라우저가 인식하게 변형해준다.</span>
-                <br />
-                <Btn />
+                <h3>Total clicks: {counter}</h3>
+                <button style={{color: "blue"}} onClick={countUp}>Click</button>
             </div>
-        );
-        ReactDOM.render(<Container />, root);
+        )};
+        reRender();
     </script>
 </html>
