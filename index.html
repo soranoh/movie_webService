@@ -11,24 +11,19 @@
 
     <script type="text/babel">
         const root = document.getElementById("root");
-        let counter = 0;
 
-        function countUp() {
-            counter++;
-            reRender();
-        };
-
-        function reRender() {
-            ReactDOM.render(<Container />, root);
-        };
-
-        function Container() {
+        function App() {
+            const [counter, setCounter] = React.useState(0);
+            const counterUp = () => {
+                setCounter(counter+1);
+            }
+            
             return (
             <div>
                 <h3>Total clicks: {counter}</h3>
-                <button style={{color: "blue"}} onClick={countUp}>Click</button>
+                <button onClick={counterUp}>Click</button>
             </div>
         )};
-        reRender();
+        ReactDOM.render(<App />, root);
     </script>
 </html>
