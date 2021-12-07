@@ -11,17 +11,17 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
-        function Btn(props) {
+        function Btn({backColor, fontSize=1, textTest, clickEvent}) {
             return (
-                <button onClick={props.clickEvent} style={{
-                    backgroundColor: props.backColor,
+                <button onClick={clickEvent} style={{
+                    backgroundColor: backColor,
                     color: "white",
                     padding: "10px 20px",
                     width: "150px",
                     border: 0,
                     borderRadius: 10,
-                    fontSize: props.fontSize,
-                }}>{props.textTest}</button>
+                    fontSize: fontSize,
+                }}>{textTest}</button>
             );
         };
         Btn.propTypes = {
