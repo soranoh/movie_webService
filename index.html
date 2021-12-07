@@ -11,22 +11,29 @@
 
     <script type="text/babel">
         function Btn(props) {
-            return <button style={{
-                backgroundColor: props.backColor,
-                color: "white",
-                padding: "10px 20px",
-                width: "100px",
-                fontSize: props.big ? 16 : 8,
-                border: 0,
-                borderRadius: 10,
-            }}>{props.textTest}</button>;
+            return (
+                <button onClick={props.clickEvent} style={{
+                    backgroundColor: props.backColor,
+                    color: "white",
+                    padding: "10px 20px",
+                    width: "150px",
+                    border: 0,
+                    borderRadius: 10,
+                }}>{props.textTest}</button>
+            );
         };
+        const MemorizedBtn = React.memo(Btn);
+
         function App() {
+            const [value, setValue] = React.useState("Save Changes");
+            const changeValue = () => {
+                setValue("Revert Changes");
+            };
 
             return (
                 <div>
-                    <Btn textTest="Save" backColor="tomato" big={false} />
-                    <Btn textTest="Confirm" backColor="olive" big={true} />
+                    <MemorizedBtn textTest={value} backColor="tomato" clickEvent={changeValue} />
+                    <MemorizedBtn textTest="Confirm" backColor="olive" />
                 </div>
             );
         };
